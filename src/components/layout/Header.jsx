@@ -28,7 +28,7 @@ const Header = () => {
                 My posts
               </NavLink>
             ) : (
-              <NavLink to="/allPosts">
+              <NavLink to="/">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="140"
@@ -167,17 +167,34 @@ const Header = () => {
           <NavLink className="togle__link" to="/aboutUs" onClick={togleClose}>
             About us
           </NavLink>
-          <NavLink className="togle__link" to="/register" onClick={togleClose}>
-            Register
-          </NavLink>
-          <NavLink
-            className="togle__link"
-            style={{ backgroundColor: "var(lyt-txt-clr)" }}
-            to="/login"
-            onClick={togleClose}
-          >
-            Login
-          </NavLink>
+          {isAuth ? null : (
+            <NavLink
+              className="togle__link"
+              to="/register"
+              onClick={togleClose}
+            >
+              Register
+            </NavLink>
+          )}
+          {isAuth ? (
+            <NavLink
+              className="togle__link"
+              style={{ backgroundColor: "var(lyt-txt-clr)" }}
+              to="/account"
+              onClick={togleClose}
+            >
+              Account
+            </NavLink>
+          ) : (
+            <NavLink
+              className="togle__link"
+              style={{ backgroundColor: "var(lyt-txt-clr)" }}
+              to="/login"
+              onClick={togleClose}
+            >
+              Login
+            </NavLink>
+          )}
         </div>
       </div>
     </Fragment>

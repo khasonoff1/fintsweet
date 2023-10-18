@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import "./style.scss";
 import { Link } from "react-router-dom";
 import { IMG_URL } from "../../../constants";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const PopularPostsCard = ({
   _id,
@@ -10,18 +11,28 @@ const PopularPostsCard = ({
   description,
   createdAt,
   user: { first_name, last_name },
-  photo: { _id: imgId },
+  photoId: imgId,
+  photoName,
 }) => {
   let date = new Date(createdAt).toString().split(" ").slice(1, 4);
+  console.log(photoName);
+
+  const errorHandler = (error) => {
+    error.target.src = "/icon.png";
+  };
 
   return (
     <Link to={`/${_id}`}>
       <div className="postsCard">
         <div className="postsCard__img-box">
-          <img
+          <LazyLoadImage
+            effect="blur"
             className="postsCard__img"
-            src={`${IMG_URL}/${imgId}.jpg`}
+            src={`${IMG_URL}/${imgId}.${
+              first_name === "Zahiriddin" ? "png" : "jpg"
+            }`}
             alt=""
+            onError={errorHandler}
           />
         </div>
         <div className="postsCard__body">
@@ -43,7 +54,8 @@ PopularPostsCard.propTypes = {
   description: PropTypes.string,
   createdAt: PropTypes.string,
   user: PropTypes.object,
-  photo: PropTypes.object,
+  photoName: PropTypes.string,
+  photoId: PropTypes.string,
 };
 
 export default PopularPostsCard;

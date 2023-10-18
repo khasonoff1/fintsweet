@@ -1,12 +1,14 @@
 import { useForm } from "react-hook-form";
 
-import "../style.scss";
 import request from "../../../../server";
 import { useContext } from "react";
 import { AuthContext } from "../../../../context/AuthContext";
 import { ROLE, TOKEN } from "../../../../constants";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import { toast } from "react-toastify";
+
+import "../style.scss";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -45,20 +47,22 @@ const RegisterPage = () => {
         navigate("/dashboard");
       }
     } catch (error) {
-      console.log(error);
+      toast.error(error.response.data);
     }
   };
-  console.log(errors);
 
   const password = watch("password");
 
   return (
-    <section className="login">
+    <section className="register">
       <div className="container">
         <h2 className="sectionTitle">Register</h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form className="form" onSubmit={handleSubmit(onSubmit)}>
           <div>
             <input
+              style={{
+                border: `1px solid ${errors.first_name ? "red" : ""}`,
+              }}
               className="firstName"
               {...register("first_name", {
                 required: "Firstname is required!",
@@ -70,6 +74,9 @@ const RegisterPage = () => {
           </div>
           <div>
             <input
+              style={{
+                border: `1px solid ${errors.last_name ? "red" : ""}`,
+              }}
               className="lastName"
               type="text"
               {...register("last_name", {
@@ -81,6 +88,9 @@ const RegisterPage = () => {
           </div>
           <div>
             <input
+              style={{
+                border: `1px solid ${errors.username ? "red" : ""}`,
+              }}
               className="username"
               type="text"
               {...register("username", {
@@ -92,6 +102,9 @@ const RegisterPage = () => {
           </div>
           <div>
             <input
+              style={{
+                border: `1px solid ${errors.password ? "red" : ""}`,
+              }}
               className="password"
               type="password"
               {...register("password", {
@@ -107,6 +120,9 @@ const RegisterPage = () => {
           </div>
           <div>
             <input
+              style={{
+                border: `1px solid ${errors.confirmPassword ? "red" : ""}`,
+              }}
               className="password"
               type="password"
               {...register("confirmPassword", {

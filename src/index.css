@@ -1,3 +1,21 @@
+@font-face {
+  font-family: InterR;
+  src: url(./assets/fonts/Inter-Regular.ttf);
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: InterM;
+  src: url(./assets/fonts/Inter-Medium.ttf);
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: Sen;
+  src: url(./assets/fonts/Sen-Bold.ttf);
+  font-weight: 700;
+  font-style: normal;
+}
 * {
   margin: 0;
   padding: 0;
@@ -13,7 +31,8 @@ li {
 a {
   text-decoration: none;
 }
-input {
+input,
+select {
   outline: none;
 }
 :root {
