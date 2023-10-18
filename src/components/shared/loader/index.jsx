@@ -6,18 +6,6 @@ const Loader = () => {
   return (
     <Fragment>
       <span className="loader"></span>
-      <div className="center">
-        <div className="wave"></div>
-        <div className="wave"></div>
-        <div className="wave"></div>
-        <div className="wave"></div>
-        <div className="wave"></div>
-        <div className="wave"></div>
-        <div className="wave"></div>
-        <div className="wave"></div>
-        <div className="wave"></div>
-        <div className="wave"></div>
-      </div>
     </Fragment>
   );
 };
