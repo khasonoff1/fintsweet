@@ -29,7 +29,7 @@ const PopularPostsCard = ({
             effect="blur"
             className="postsCard__img"
             src={`${IMG_URL}/${imgId}.${
-              first_name === "Zahiriddin" ? "png" : "jpg"
+              first_name === "Kamronbek" ? "png" : "jpg"
             }`}
             alt=""
             onError={errorHandler}
