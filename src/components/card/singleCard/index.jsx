@@ -23,7 +23,7 @@ const SingleCard = ({
           className="singleImg"
           effect="blur"
           src={`${IMG_URL}${photoId}.${
-            first_name === "Zahiriddin" ? "png" : "jpg"
+            first_name === "Kamronbek" ? "png" : "jpg"
           }`}
           alt=""
         />
