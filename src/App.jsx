@@ -9,11 +9,16 @@ import SinglePage from "./pages/public/single";
 import CategoryPage from "./pages/public/category";
 import RegisterPage from "./pages/public/auth/register";
 import LoginPage from "./pages/public/auth/login";
+import { AuthContext } from "./context/AuthContext";
 import MyPostsPage from "./pages/user/my-posts/MyPostsPage";
-import DashboardPage from "./pages/admin/dashboard/DashboardPage";
 import NotFoundPage from "./pages/public/notFound/NotFoundPage";
 import AccountPage from "./pages/account/AccountPage";
-import { AuthContext } from "./context/AuthContext";
+import DashboardPage from "./pages/admin/DashboardPage";
+import AdminLayout from "./components/layout/admin-layout/AdminLayout";
+import UserControl from "./pages/admin/UserControl";
+import CategoryControl from "./pages/admin/CategoryControl";
+import PostControl from "./pages/admin/PostControl";
+import CommentControl from "./pages/admin/CommentControl";
 
 function App() {
     const { isAuth, role } = useContext(AuthContext);
@@ -31,7 +36,15 @@ function App() {
                     {isAuth ? null : <Route path="register" element={<RegisterPage />} />}
                     {isAuth ? <Route path="account" element={<AccountPage />} /> : <Route path="login" element={<LoginPage />} />}
                 </Route>
-                {isAuth && role === "admin" ? <Route path="dashboard" element={<DashboardPage />} /> : null}
+                {isAuth && role === "admin" ? (
+                    <Route element={<AdminLayout />}>
+                        <Route path="dashboard" element={<DashboardPage />} />
+                        <Route path="userControl" element={<UserControl />} />
+                        <Route path="categoryControl" element={<CategoryControl />} />
+                        <Route path="postControl" element={<PostControl />} />
+                        <Route path="commentControl" element={<CommentControl />} />
+                    </Route>
+                ) : null}
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>
         </BrowserRouter>
