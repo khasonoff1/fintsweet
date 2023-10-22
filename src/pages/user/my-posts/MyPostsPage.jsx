@@ -11,7 +11,6 @@ import { PopularBlogsContext } from "../../../context/PopularBlogsContext";
 import MyPostCard from "../../../components/card/myPostCard/MyPostCard";
 import "./style.scss";
 import Loader from "../../../components/shared/loader";
-import { toast } from "react-toastify";
 
 const MyPostsPage = () => {
   const [posts, setPosts] = useState([]);
@@ -49,40 +48,32 @@ const MyPostsPage = () => {
   const closeModal = () => setOpen(false);
 
   useEffect(() => {
-    try {
-      const getMyPosts = async () => {
-        const {
-          data: { data: data1, pagination },
-        } = await request.get(
-          `post/user?limit=${LIMIT}&${search ? `search=${search}` : ""}`
-        );
+    const getMyPosts = async () => {
+      const {
+        data: { data: data1, pagination },
+      } = await request.get(
+        `post/user?limit=${LIMIT}&${search ? `search=${search}` : ""}`
+      );
 
-        setPosts(data1);
-        setPage(pagination.next);
-        setTotal(pagination.total);
-      };
-      getMyPosts();
-    } catch (error) {
-      toast.error(error);
-    }
+      setPosts(data1);
+      setPage(pagination.next);
+      setTotal(pagination.total);
+    };
+    getMyPosts();
   }, [search, callback]);
 
   const refetchData = async () => {
     if (posts.length < total) {
-      try {
-        const {
-          data: { data: data1, pagination },
-        } = await request.get(
-          `post/user?limit=${LIMIT}&page=${page}&${
-            search ? `search=${search}` : ""
-          }`
-        );
+      const {
+        data: { data: data1, pagination },
+      } = await request.get(
+        `post/user?limit=${LIMIT}&page=${page}&${
+          search ? `search=${search}` : ""
+        }`
+      );
 
-        setPosts([...posts, ...data1]);
-        setPage(pagination.next);
-      } catch (error) {
-        toast.error(error);
-      }
+      setPosts([...posts, ...data1]);
+      setPage(pagination.next);
     } else {
       setHasMore(false);
     }
@@ -99,8 +90,6 @@ const MyPostsPage = () => {
         await request.put(`post/${selected}`, values);
       }
       callback();
-    } catch (error) {
-      toast.error(error);
     } finally {
       setLoader(false);
     }
@@ -113,8 +102,6 @@ const MyPostsPage = () => {
       formData.append("file", e.target.files["0"]);
       const { data } = await request.post("upload", formData);
       setPhoto(data._id);
-    } catch (error) {
-      toast.error(error);
     } finally {
       setPhotoLoad(false);
     }
@@ -125,8 +112,6 @@ const MyPostsPage = () => {
       setLoader(true);
       await request.delete(`post/${id}`);
       callback();
-    } catch (error) {
-      toast.error(error);
     } finally {
       setLoader(false);
     }
@@ -138,24 +123,26 @@ const MyPostsPage = () => {
       setFormLoad(true);
       let { data } = await request.get(`post/${id}`);
       reset(data);
-    } catch (error) {
-      toast.error(error);
     } finally {
       setFormLoad(false);
     }
   };
 
   const handleSearch = (e) => {
-    e.preventDefault();
-    setSearch(e.target.name.value.toLowerCase());
+    setSearch(e.target.value.toLowerCase());
   };
 
   return (
     <div className="posts">
       <div className="container">
         <h2 className="sectionTitle">My posts</h2>
-        <form className="posts__form" onSubmit={handleSearch}>
-          <input type="text" id="name" placeholder="Searching ..." />
+        <form className="posts__form">
+          <input
+            type="text"
+            id="name"
+            placeholder="Searching ..."
+            onChange={handleSearch}
+          />
           <button type="submit"></button>
           <button onClick={openModal}>Add post</button>
         </form>

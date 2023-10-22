@@ -1,15 +1,7 @@
-import { Fragment } from "react";
-
 import "./style.scss";
 
 const Loader = () => {
-    return (
-        <Fragment>
-            <div className="loader-box">
-                <span className="loader"></span>
-            </div>
-        </Fragment>
-    );
+    return <span className="loader"></span>;
 };
 
 export default Loader;

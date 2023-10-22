@@ -16,7 +16,7 @@ const PopularPostsCard = ({
   let date = new Date(createdAt).toString().split(" ").slice(1, 4);
 
   const errorHandler = (error) => {
-    error.target.src = "/icon.png";
+    error.target.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH4rGJta9R41rPLUoLdbjGOekv9EPHWFz8_g&usqp=CAU";
   };
 
   const photoType = photo?.name?.split(".")[1];

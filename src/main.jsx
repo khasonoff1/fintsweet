@@ -15,16 +15,16 @@ import StoreProvider from "./redux/store/index.jsx";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <PopularBlogsContextProvider>
-      <AllPostsContextProvider>
-        <AuthContextProvider>
-          <ToastContainer />
-          <StoreProvider>
-            <App />
-          </StoreProvider>
-        </AuthContextProvider>
-      </AllPostsContextProvider>
-    </PopularBlogsContextProvider>
-  </React.StrictMode>
+    <React.StrictMode>
+        <ToastContainer />
+        <PopularBlogsContextProvider>
+            <AllPostsContextProvider>
+                <AuthContextProvider>
+                    <StoreProvider>
+                        <App />
+                    </StoreProvider>
+                </AuthContextProvider>
+            </AllPostsContextProvider>
+        </PopularBlogsContextProvider>
+    </React.StrictMode>
 );
