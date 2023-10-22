@@ -41,19 +41,6 @@ export const controlModal = (payload) => (dispatch) => {
   dispatch(updateState({ isModalOpen: payload }));
 };
 
-// export const uploadPhoto = (file) => async (dispatch) => {
-//   try {
-//     dispatch(updateState({ photoLoad: true }));
-//     let formData = new FormData();
-//     formData.append("file", file);
-//     const { data } = await request.post("auth/upload", formData);
-//     console.log(data);
-//     dispatch(updateState({ photoData: data }));
-//   } finally {
-//     dispatch(updateState({ photoLoad: false }));
-//   }
-// };
-
 export const sendUser =
   ({ values, selected, activePage, search }) =>
   async (dispatch) => {

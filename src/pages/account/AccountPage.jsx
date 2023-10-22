@@ -111,27 +111,6 @@ const AccountPage = () => {
                                     )}
                                 </div>
                             </Upload>
-
-                            {/* <label htmlFor="img" className="account__img">
-                {photo ? (
-                  <LazyLoadImage
-                    effect="blur"
-                    style={{ width: "100%", height: "100%" }}
-                    src={getUserImg(photo)}
-                  />
-                ) : (
-                  <Fragment>
-                    {photoLoad ? <LoadingOutlined /> : <AiOutlineUpload />}
-                    <span>Upload</span>
-                  </Fragment>
-                )}
-              </label>
-              <input
-                className="img-input"
-                type="file"
-                id="img"
-                onChange={uploadPhoto}
-              /> */}
                         </div>
                         {loading ? (
                             <Loader />

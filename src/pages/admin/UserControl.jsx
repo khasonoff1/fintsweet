@@ -1,41 +1,12 @@
 import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-    Button,
-    Flex,
-    Form,
-    Image,
-    Pagination,
-    Input,
-    Modal,
-    Space,
-    Table,
-    // Upload,
-} from "antd";
+import { Button, Flex, Form, Image, Pagination, Input, Modal, Space, Table } from "antd";
 
-import {
-    UserAddOutlined,
-    SaveOutlined,
-    EditOutlined,
-    DeleteOutlined,
-    // LoadingOutlined,
-    // PlusOutlined,
-} from "@ant-design/icons";
+import { UserAddOutlined, SaveOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import Search from "antd/es/input/Search";
-import {
-    changePage,
-    controlModal,
-    deleteUser,
-    editUser,
-    getUser,
-    searchUser,
-    sendUser,
-    updateState,
-    // uploadPhoto,
-} from "../../redux/actions/user";
+import { changePage, controlModal, deleteUser, editUser, getUser, searchUser, sendUser, updateState } from "../../redux/actions/user";
 import { getUserImg } from "../../utils";
 import { LIMIT_TABLE } from "../../constants";
-// import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const UserControl = () => {
     const [form] = Form.useForm();
@@ -49,9 +20,7 @@ const UserControl = () => {
         selected,
         isModalLoading,
         isModalOpen,
-        // photoLoad,
         search,
-        // photoData,
     } = useSelector((state) => state.user);
 
     useEffect(() => {
@@ -69,7 +38,6 @@ const UserControl = () => {
 
     const handleOk = async () => {
         let values = await form.validateFields();
-        // values.photo = photoData._id;
         dispatch(sendUser({ values, selected, activePage, search }));
     };
 
