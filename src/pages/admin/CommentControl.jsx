@@ -1,8 +1,8 @@
 import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Flex, Form, Pagination, Input, Modal, Space, Table } from "antd";
-
 import { UserAddOutlined, SaveOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
+
 import Search from "antd/es/input/Search";
 import { changePage, controlModal, deleteComment, editComment, getComment, searchComment, sendComment, updateState } from "../../redux/actions/comment";
 import { LIMIT_TABLE } from "../../constants";

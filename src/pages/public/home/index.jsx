@@ -1,11 +1,12 @@
 import { Fragment, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-import "./style.scss";
-import request from "../../../server";
 import PopularPostsSlider from "../../../components/carousel/PopularPostsSlider";
 import CategorySlider from "../../../components/carousel/CategorySlider";
-import { Link } from "react-router-dom";
 import Loader from "../../../components/shared/loader";
+import request from "../../../server";
+
+import "./style.scss";
 
 const HomePage = () => {
   const [latestPost, setLatestPost] = useState({});

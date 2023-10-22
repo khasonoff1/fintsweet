@@ -1,10 +1,10 @@
 import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Flex, Form, Image, Pagination, Input, Modal, Space, Table } from "antd";
-
 import { UserAddOutlined, SaveOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import Search from "antd/es/input/Search";
 import { changePage, controlModal, deleteUser, editUser, getUser, searchUser, sendUser, updateState } from "../../redux/actions/user";
+
+import Search from "antd/es/input/Search";
 import { getUserImg } from "../../utils";
 import { LIMIT_TABLE } from "../../constants";
 
@@ -12,16 +12,7 @@ const UserControl = () => {
     const [form] = Form.useForm();
     const dispatch = useDispatch();
 
-    const {
-        users,
-        loading,
-        total,
-        activePage,
-        selected,
-        isModalLoading,
-        isModalOpen,
-        search,
-    } = useSelector((state) => state.user);
+    const { users, loading, total, activePage, selected, isModalLoading, isModalOpen, search } = useSelector((state) => state.user);
 
     useEffect(() => {
         total === 0 && dispatch(getUser());

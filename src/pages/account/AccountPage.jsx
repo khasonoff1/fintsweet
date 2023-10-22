@@ -1,20 +1,20 @@
 import { Fragment, useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-
+import { Upload } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+import dayjs from "dayjs";
+
 import { AuthContext } from "../../context/AuthContext";
 import Loader from "../../components/shared/loader";
 import { getUserImg } from "../../utils";
-import dayjs from "dayjs";
-import request from "../../server";
 import AccountForm from "./AccountForm";
+import request from "../../server";
 
-import "../public/auth/style.scss";
 import "./style.scss";
-import { useNavigate } from "react-router-dom";
-import { Upload } from "antd";
+import "../public/auth/style.scss";
 
 const AccountPage = () => {
     const navigate = useNavigate();

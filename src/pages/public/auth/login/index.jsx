@@ -1,13 +1,15 @@
-import { useForm } from "react-hook-form";
-import "../style.scss";
-import request from "../../../../server";
 import { useContext, useState } from "react";
-import { AuthContext } from "../../../../context/AuthContext";
-import Cookies from "js-cookie";
-import { ROLE, TOKEN } from "../../../../constants";
 import { useNavigate } from "react-router-dom";
-import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
+import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import Cookies from "js-cookie";
+import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
+
+import { ROLE, TOKEN } from "../../../../constants";
+import { AuthContext } from "../../../../context/AuthContext";
+import request from "../../../../server";
+
+import "../style.scss";
 
 const LoginPage = () => {
   const { setIsAuth, setRole, getUser } = useContext(AuthContext);

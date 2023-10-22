@@ -1,13 +1,13 @@
 import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Flex, Form, Image, Pagination, Input, Modal, Space, Table, Upload } from "antd";
-
 import { UserAddOutlined, SaveOutlined, EditOutlined, DeleteOutlined, LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
 import Search from "antd/es/input/Search";
 import { changePage, controlModal, deleteCategory, editCategory, getCategory, searchCategory, sendCategory, updateState, uploadPhoto } from "../../redux/actions/category";
 import { getImg } from "../../utils";
 import { LIMIT_CTGR } from "../../constants";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const CategoryControl = () => {
     const [form] = Form.useForm();

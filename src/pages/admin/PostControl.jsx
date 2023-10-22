@@ -1,13 +1,13 @@
 import { Fragment, useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Flex, Form, Image, Pagination, Input, Modal, Space, Table, Upload, Select } from "antd";
-
 import { UserAddOutlined, SaveOutlined, EditOutlined, DeleteOutlined, LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
 import Search from "antd/es/input/Search";
 import { changePage, controlModal, deletePost, editPost, getPost, searchPost, sendPost, updateState, uploadPhoto } from "../../redux/actions/post";
 import { getImg } from "../../utils";
 import { LIMIT_TABLE } from "../../constants";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import { PopularBlogsContext } from "../../context/PopularBlogsContext";
 
 const PostControl = () => {

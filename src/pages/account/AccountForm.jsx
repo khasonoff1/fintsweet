@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import request from "../../server";
 import { Modal } from "antd";
-import { toast } from "react-toastify";
 import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
+import { toast } from "react-toastify";
+
+import request from "../../server";
 
 const AccountForm = () => {
     const [formLoad, setFormLoad] = useState(false);

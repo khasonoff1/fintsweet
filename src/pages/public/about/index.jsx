@@ -1,8 +1,9 @@
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
 import foto from "../../../assets/images/hands.png";
 import foto2 from "../../../assets/images/friends.png";
 
 import "./style.scss";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const AboutPage = () => {
   return (

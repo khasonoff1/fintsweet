@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom";
+
 import SingleCard from "../../../components/card/singleCard";
-import Loader from "../../../components/shared/loader";
 import useSingleData from "../../../hook/useSingleData";
+import Loader from "../../../components/shared/loader";
 
 const SinglePage = () => {
   const { postId } = useParams();

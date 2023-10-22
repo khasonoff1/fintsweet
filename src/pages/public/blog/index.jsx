@@ -1,52 +1,40 @@
 import { useContext } from "react";
-import { AllPostsContext } from "../../../context/AllPostsContext";
 import InfiniteScroll from "react-infinite-scroll-component";
 
+import { AllPostsContext } from "../../../context/AllPostsContext";
 import Loader from "../../../components/shared/loader";
 import PostsCard from "../../../components/card/postsCard";
 
 import "./style.scss";
 
 const BlogPage = () => {
-  const { posts, loading, handleSearch, refetchData, hasMore, ctgrName } =
-    useContext(AllPostsContext);
+    const { posts, loading, handleSearch, refetchData, hasMore, ctgrName } = useContext(AllPostsContext);
 
-  return (
-    <div className="posts">
-      <div className="container">
-        <h2 className="sectionTitle">All posts</h2>
-        <form className="posts__form">
-          <input
-            type="text"
-            id="name"
-            placeholder="Searching ..."
-            onChange={handleSearch}
-          />
-        </form>
-        <div className="posts__box">
-          <InfiniteScroll
-            dataLength={posts.length}
-            next={refetchData}
-            hasMore={hasMore}
-            loader={<h4>Loading...</h4>}
-            endMessage={
-              <p style={{ textAlign: "center" }}>
-                <b>Yay! You have seen it all</b>
-              </p>
-            }
-          >
-            {loading ? (
-              <Loader />
-            ) : (
-              posts.map((post, i) => (
-                <PostsCard key={i} {...post} ctgrName={ctgrName} />
-              ))
-            )}
-          </InfiniteScroll>
+    return (
+        <div className="posts">
+            <div className="container">
+                <h2 className="sectionTitle">All posts</h2>
+                <form className="posts__form">
+                    <input type="text" id="name" placeholder="Searching ..." onChange={handleSearch} />
+                </form>
+                <div className="posts__box">
+                    <InfiniteScroll
+                        dataLength={posts.length}
+                        next={refetchData}
+                        hasMore={hasMore}
+                        loader={<h4>Loading...</h4>}
+                        endMessage={
+                            <p style={{ textAlign: "center" }}>
+                                <b>Yay! You have seen it all</b>
+                            </p>
+                        }
+                    >
+                        {loading ? <Loader /> : posts.map((post, i) => <PostsCard key={i} {...post} ctgrName={ctgrName} />)}
+                    </InfiniteScroll>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default BlogPage;

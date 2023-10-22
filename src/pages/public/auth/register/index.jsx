@@ -1,172 +1,148 @@
-import { useForm } from "react-hook-form";
-
-import request from "../../../../server";
 import { useContext, useState } from "react";
-import { AuthContext } from "../../../../context/AuthContext";
-import { ROLE, TOKEN } from "../../../../constants";
 import { useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
+import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import Cookies from "js-cookie";
 import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
+
+import { ROLE, TOKEN } from "../../../../constants";
+import { AuthContext } from "../../../../context/AuthContext";
+import request from "../../../../server";
 
 import "../style.scss";
 
 const RegisterPage = () => {
-  const navigate = useNavigate();
-  const [passwordHide, setPasswordHide] = useState(true);
-  const [confirmPasswordHide, setConfirmPasswordHide] = useState(true);
+    const navigate = useNavigate();
+    const [passwordHide, setPasswordHide] = useState(true);
+    const [confirmPasswordHide, setConfirmPasswordHide] = useState(true);
 
-  const {
-    formState: { errors },
-    register,
-    handleSubmit,
-    watch,
-  } = useForm({
-    mode: "onTouched",
-  });
+    const {
+        formState: { errors },
+        register,
+        handleSubmit,
+        watch,
+    } = useForm({
+        mode: "onTouched",
+    });
 
-  const { setIsAuth, setRole } = useContext(AuthContext);
+    const { setIsAuth, setRole } = useContext(AuthContext);
 
-  const onSubmit = async (data) => {
-    const user = {
-      first_name: data.first_name,
-      last_name: data.last_name,
-      username: data.username,
-      password: data.password,
+    const onSubmit = async (data) => {
+        const user = {
+            first_name: data.first_name,
+            last_name: data.last_name,
+            username: data.username,
+            password: data.password,
+        };
+        const {
+            data: { token, role },
+        } = await request.post(`auth/register/`, user);
+        toast.error(data);
+
+        setIsAuth(true);
+        setRole(role);
+        Cookies.set(TOKEN, token);
+        Cookies.set(ROLE, role);
+        if (role === "user") {
+            navigate("/myPosts");
+        } else {
+            navigate("/dashboard");
+        }
     };
-      const {
-        data: { token, role },
-      } = await request.post(`auth/register/`, user);
-      toast.error(data);
 
-      setIsAuth(true);
-      setRole(role);
-      Cookies.set(TOKEN, token);
-      Cookies.set(ROLE, role);
-      if (role === "user") {
-        navigate("/myPosts");
-      } else {
-        navigate("/dashboard");
-      }
-  
-  };
+    const password = watch("password");
 
-  const password = watch("password");
-
-  return (
-    <section className="register">
-      <div className="container">
-        <h2 className="sectionTitle">Register</h2>
-        <form className="form" onSubmit={handleSubmit(onSubmit)}>
-          <div>
-            <input
-              style={{
-                border: `1px solid ${errors.first_name ? "red" : ""}`,
-              }}
-              className="firstName"
-              {...register("first_name", {
-                required: "Firstname is required!",
-              })}
-              type="text"
-              placeholder="Firstname"
-            />
-            {errors.first_name ? <p>{errors.first_name?.message}</p> : null}
-          </div>
-          <div>
-            <input
-              style={{
-                border: `1px solid ${errors.last_name ? "red" : ""}`,
-              }}
-              className="lastName"
-              type="text"
-              {...register("last_name", {
-                required: "Lastname is required!",
-              })}
-              placeholder="Lastname"
-            />
-            {errors.last_name ? <p>{errors.last_name?.message}</p> : null}
-          </div>
-          <div>
-            <input
-              style={{
-                border: `1px solid ${errors.username ? "red" : ""}`,
-              }}
-              className="username"
-              type="text"
-              {...register("username", {
-                required: "Username is required!",
-              })}
-              placeholder="Username"
-            />
-            {errors.username ? <p>{errors.username?.message}</p> : null}
-          </div>
-          <div>
-            <div className="inputBox">
-              <input
-                style={{
-                  border: `1px solid ${errors.password ? "red" : ""}`,
-                }}
-                className="password"
-                type={passwordHide === true ? "password" : "text"}
-                {...register("password", {
-                  required: "Password is required!",
-                  minLength: {
-                    value: 5,
-                    message: "Password minimal length must be 5",
-                  },
-                })}
-                placeholder="Password"
-              />
-              {passwordHide ? (
-                <EyeInvisibleOutlined
-                  className="password-img"
-                  onClick={() => setPasswordHide(false)}
-                />
-              ) : (
-                <EyeOutlined
-                  className="password-img"
-                  onClick={() => setPasswordHide(true)}
-                />
-              )}
+    return (
+        <section className="register">
+            <div className="container">
+                <h2 className="sectionTitle">Register</h2>
+                <form className="form" onSubmit={handleSubmit(onSubmit)}>
+                    <div>
+                        <input
+                            style={{
+                                border: `1px solid ${errors.first_name ? "red" : ""}`,
+                            }}
+                            className="firstName"
+                            {...register("first_name", {
+                                required: "Firstname is required!",
+                            })}
+                            type="text"
+                            placeholder="Firstname"
+                        />
+                        {errors.first_name ? <p>{errors.first_name?.message}</p> : null}
+                    </div>
+                    <div>
+                        <input
+                            style={{
+                                border: `1px solid ${errors.last_name ? "red" : ""}`,
+                            }}
+                            className="lastName"
+                            type="text"
+                            {...register("last_name", {
+                                required: "Lastname is required!",
+                            })}
+                            placeholder="Lastname"
+                        />
+                        {errors.last_name ? <p>{errors.last_name?.message}</p> : null}
+                    </div>
+                    <div>
+                        <input
+                            style={{
+                                border: `1px solid ${errors.username ? "red" : ""}`,
+                            }}
+                            className="username"
+                            type="text"
+                            {...register("username", {
+                                required: "Username is required!",
+                            })}
+                            placeholder="Username"
+                        />
+                        {errors.username ? <p>{errors.username?.message}</p> : null}
+                    </div>
+                    <div>
+                        <div className="inputBox">
+                            <input
+                                style={{
+                                    border: `1px solid ${errors.password ? "red" : ""}`,
+                                }}
+                                className="password"
+                                type={passwordHide === true ? "password" : "text"}
+                                {...register("password", {
+                                    required: "Password is required!",
+                                    minLength: {
+                                        value: 5,
+                                        message: "Password minimal length must be 5",
+                                    },
+                                })}
+                                placeholder="Password"
+                            />
+                            {passwordHide ? <EyeInvisibleOutlined className="password-img" onClick={() => setPasswordHide(false)} /> : <EyeOutlined className="password-img" onClick={() => setPasswordHide(true)} />}
+                        </div>
+                        {errors.password ? <p>{errors.password?.message}</p> : null}
+                    </div>
+                    <div>
+                        <div className="inputBox">
+                            <input
+                                style={{
+                                    border: `1px solid ${errors.confirmPassword ? "red" : ""}`,
+                                }}
+                                className="password"
+                                type={confirmPasswordHide === true ? "password" : "text"}
+                                {...register("confirmPassword", {
+                                    required: "Confirm password is required!",
+                                    validate: (value) => value === password || "The passwords do not match!",
+                                })}
+                                placeholder="Confirm password"
+                            />
+                            {confirmPasswordHide ? <EyeInvisibleOutlined className="password-img" onClick={() => setConfirmPasswordHide(false)} /> : <EyeOutlined className="password-img" onClick={() => setConfirmPasswordHide(true)} />}
+                        </div>
+                        {errors.confirmPassword ? <p>{errors.confirmPassword?.message}</p> : null}
+                    </div>
+                    <button type="submit">Register</button>
+                </form>
             </div>
-            {errors.password ? <p>{errors.password?.message}</p> : null}
-          </div>
-          <div>
-            <div className="inputBox">
-              <input
-                style={{
-                  border: `1px solid ${errors.confirmPassword ? "red" : ""}`,
-                }}
-                className="password"
-                type={confirmPasswordHide === true ? "password" : "text"}
-                {...register("confirmPassword", {
-                  required: "Confirm password is required!",
-                  validate: (value) =>
-                    value === password || "The passwords do not match!",
-                })}
-                placeholder="Confirm password"
-              />
-              {confirmPasswordHide ? (
-                <EyeInvisibleOutlined
-                  className="password-img"
-                  onClick={() => setConfirmPasswordHide(false)}
-                />
-              ) : (
-                <EyeOutlined
-                  className="password-img"
-                  onClick={() => setConfirmPasswordHide(true)}
-                />
-              )}
-            </div>
-            {errors.confirmPassword ? (
-              <p>{errors.confirmPassword?.message}</p>
-            ) : null}
-          </div>
-          <button type="submit">Register</button>
-        </form>
-      </div>
-    </section>
-  );
+        </section>
+    );
 };
 
 export default RegisterPage;
